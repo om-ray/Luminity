@@ -1,0 +1,74 @@
+.root {
+  opacity: 1;
+  text-align: center;
+}
+
+.megrim {
+  font-family: "Megrim";
+}
+
+.avenir {
+  font-family: "Avenir";
+}
+
+.navbar {
+  display: flex;
+  position: absolute;
+  width: 100vw;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  padding: 17px;
+  border-bottom: #2c2c2c solid 1px;
+  background: #141415;
+  color: #909090;
+  margin-bottom: 3vh;
+}
+
+.titles {
+  margin-top: 130px;
+  font-family: "Avenir";
+  font-weight: 800;
+  font-size: 30px;
+}
+
+.logo {
+  background: #232526;
+  font-family: "Megrim";
+  border-radius: 100px;
+  padding: 10px 30px;
+  color: white;
+  font-weight: 800;
+  font-size: 30px;
+}
+
+.navlinks {
+  font-family: "Megrim";
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  color: white;
+}
+
+.navlinks > * {
+  background-color: #232526;
+}
+
+.footer {
+  display: flex;
+  width: 100vw;
+  height: 80px;
+  position: absolute;
+  bottom: 0;
+  color: white;
+  background: #141415;
+  align-items: center;
+  border-top: #2c2c2c solid 1px;
+  justify-content: center;
+}
+
+.white {
+  color: white;
+}

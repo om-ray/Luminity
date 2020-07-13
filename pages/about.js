@@ -13,16 +13,16 @@ let useStyles = makeStyles({
   },
 });
 
-function Index() {
+function About() {
   let classes = useStyles();
 
   return (
     <div className="root">
       <Nav></Nav>
-      <Typography className={classes.title}>Home</Typography>
+      <Typography className={classes.title}>About</Typography>
       <Footer></Footer>
     </div>
   );
 }
 
-export default Index;
+export default About;
