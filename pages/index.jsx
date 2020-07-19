@@ -1,6 +1,6 @@
 import React from "react";
-import Nav from "./nav";
-import Footer from "./footer";
+import Nav from "./components/nav";
+import Footer from "./components/footer";
 import { Box } from "@material-ui/core";
 
 function Index() {

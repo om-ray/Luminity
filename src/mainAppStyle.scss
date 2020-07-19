@@ -1,0 +1,150 @@
+* {
+  font-family: "Avenir";
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+hr {
+  border-color: #2c2c2c;
+}
+
+i {
+  font-size: 20px;
+}
+
+.main_app {
+  display: flex;
+}
+
+.main_app_tasks {
+  width: fit-content;
+}
+
+.main_app_tasks_kanban {
+  width: calc(100vh - 350px);
+}
+
+.main_app_nav {
+  width: 340px;
+  min-height: 100vh;
+  padding: 10px 15px;
+  border-right: #2c2c2c solid 1px;
+}
+
+.group_name_title_container {
+  width: 300px;
+  height: 40px;
+  display: flex;
+}
+
+.group_name_title {
+  font-family: "Avenir";
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 30px;
+  color: #e6e6e6;
+}
+
+.group_name_btn {
+  font-weight: 900;
+  font-size: 8px;
+  width: 16px;
+  height: 32px;
+  color: #e6e6e6;
+}
+
+.date_picker_container {
+  z-index: -1;
+  width: 300px;
+  font-size: 11px;
+}
+
+.collapse_left_btn {
+  position: relative;
+  padding: 10px;
+}
+
+.tasks_nav_bar {
+  color: #e6e6e6;
+  display: flex;
+  justify-content: space-between;
+  width: calc(100vw - 350px);
+  height: 60px;
+  border-bottom: solid #2c2c2c 1px;
+}
+
+.nav_btn_active {
+  border-bottom: solid rgba(255, 255, 255, 0.5) 5px;
+}
+
+.tasks_btn {
+  color: #e6e6e6;
+}
+
+.channel_selector_container {
+  width: 100%;
+  padding: 10px 15px;
+  transition: ease-in-out 0.2s;
+  height: fit-content;
+  &:hover,
+  &:focus {
+    background-color: #55cd7c;
+    color: #141415;
+    .channel_icon {
+      color: #141415;
+    }
+  }
+
+  &:active {
+    background-color: rgb(53, 122, 76);
+    color: #e6e6e6;
+    .channel_icon {
+      color: #e6e6e6;
+    }
+  }
+}
+
+.channels_title {
+  font-family: "Avenir";
+  font-weight: 600;
+  font-size: 12px;
+  margin: 10px;
+}
+
+.task_channel_title {
+  font-family: "Avenir";
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.channel_selector_choice {
+  text-transform: lowercase;
+}
+
+.channel_icon {
+  transition: ease-in-out 0.2s;
+  color: #55cd7c;
+}
+
+.toggle_icon {
+  text-transform: lowercase;
+}
+
+.calendars_title {
+  font-family: "Avenir";
+  font-weight: 600;
+  font-size: 12px;
+  margin: 15px 10px;
+}
+
+.today_btn {
+  font-size: 14px;
+  p {
+    margin: 0;
+  }
+}

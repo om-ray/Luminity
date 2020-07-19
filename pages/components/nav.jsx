@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "../src/Link";
+import Link from "../../src/Link";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -26,6 +26,7 @@ let useStyles = makeStyles(() => ({
     borderBottom: "#2c2c2c solid 1px !important",
     background: "#141415",
     color: "#909090",
+    fontFamily: "Megrim",
     marginBottom: "3vh",
     // opacity: 0.5,
   },
@@ -68,7 +69,7 @@ function Nav() {
     <AppBar position="static" className={classes.navBar}>
       <Toolbar className={classes.navBar}>
         <Typography variant="h4" className={classes.logo}>
-          <Link href="/" color="inherit">
+          <Link className={classes.megrim} href="/" color="inherit">
             Luminity
           </Link>
         </Typography>
@@ -81,6 +82,11 @@ function Nav() {
           <Button className={classes.avenir}>
             <Link color="primary" href="/login">
               Login
+            </Link>
+          </Button>
+          <Button className={classes.avenir}>
+            <Link color="primary" href="/mainApp?channel=all">
+              App
             </Link>
           </Button>
         </div>

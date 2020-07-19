@@ -1,5 +1,5 @@
 import React from "react";
-import Copyright from "../src/Copyright";
+import Copyright from "../../src/Copyright";
 
 function Footer() {
   return (
