@@ -1,11 +1,13 @@
 import React from "react";
-import { Box, IconButton, Button, Link } from "@material-ui/core";
+import { Box, IconButton, Link } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { CollapseLeftBtn } from "./collapse_btn";
+import moment from "moment";
+import { useState } from "react";
 
 function TaskViewNav() {
   return (
-    <Box alignContent="right" textAlign="right">
+    <Box alignContent="right" textAlign="right" position="fixed">
       <div className="tasks_nav_bar">
         <Box display="flex" className="task_channel_title">
           <CollapseLeftBtn></CollapseLeftBtn>
@@ -30,11 +32,12 @@ function TaskViewNav() {
               color: "rgba(255, 255, 255, 0.5)",
               position: "absolute",
               top: 35,
-              left: 390,
+              left: 50,
             }}
             href="#today"
+            id="today_btn"
             className="today_btn">
-            <p style={{ position: "absolute", top: "60" }}>Today</p>
+            <p>Today</p>
           </Link>
         </Box>
         <Box>

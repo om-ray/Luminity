@@ -85,7 +85,7 @@ function Nav() {
             </Link>
           </Button>
           <Button className={classes.avenir}>
-            <Link color="primary" href="/mainApp?channel=all">
+            <Link color="primary" href="/mainApp?channel=all#today">
               App
             </Link>
           </Button>

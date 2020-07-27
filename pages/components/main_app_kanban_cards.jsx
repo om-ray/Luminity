@@ -1,43 +1,28 @@
 import React from "react";
 import { Card, CardContent, Button } from "@material-ui/core";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import { useState } from "react";
+import AddedTaskCard from "./added_task_cards";
 
-let date = new Date();
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
+let addedCards = [];
+let addTaskCard = function () {
+  addedCards.push(<AddedTaskCard key={addedCards.length}></AddedTaskCard>);
+  console.log(addedCards.length);
+  return addedCards;
+};
 
-let months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
+let [cards, setCards] = ["", ""];
+function MainAppKanbanCard({ id, date, days, className }) {
+  [cards, setCards] = useState([]);
 
-let today = days[date.getDay()];
-let thisMonth = months[date.getMonth()];
-let thisDate = date.getDate();
-
-function MainAppKanban() {
   return (
     <div
+      id={id}
+      className={className}
       style={{
         padding: "12px 20px 0px",
         width: "272px",
+        backgroundColor: "#141415",
       }}>
       <Card
         style={{
@@ -51,16 +36,20 @@ function MainAppKanban() {
               <span
                 style={{ fontSize: "24px", fontWeight: "600" }}
                 className="kanban_day_date_dotw">
-                {today}
+                {days}
               </span>
             </div>
             <span
-              style={{ fontSize: "14px", fontWeight: "500", color: "#a0a0a0" }}
-              className="kanban_day_date_dotm">{`${thisMonth} ${thisDate}`}</span>
+              style={{
+                fontSize: "14px",
+                fontWeight: "500",
+                // color: "#a0a0a0",
+              }}
+              className="kanban_day_date_dotm">{`${date}`}</span>
           </div>
           <div
             style={{
-              backgroundColor: "#1f1f1e",
+              // backgroundColor: "#1f1f1e",
               width: "232px",
               height: "8px",
               margin: "13px 0px",
@@ -69,7 +58,7 @@ function MainAppKanban() {
             className="task_progress">
             <div
               style={{
-                backgroundColor: "#4dcd7d",
+                // backgroundColor: "#4dcd7d",
                 height: "8px",
                 width: "35.7%",
                 borderRadius: "5px",
@@ -83,13 +72,15 @@ function MainAppKanban() {
           height: "32px",
           alignItems: "center",
           display: "flex",
-          backgroundColor: "#232325",
-        }}>
+          // backgroundColor: "#232325",
+        }}
+        className="add_task_container">
         <CardContent
           style={{
             padding: "0px",
-            backgroundColor: "#232325",
-          }}>
+            // backgroundColor: "#232325",
+          }}
+          className="add_task_container_content">
           <Button
             style={{
               display: "flex",
@@ -97,29 +88,35 @@ function MainAppKanban() {
               textTransform: "none",
               width: "232px",
               paddingRight: "130px",
+            }}
+            onClick={() => {
+              setCards([...addTaskCard()]);
             }}>
             <AddCircleOutlineIcon
               style={{
                 fontSize: "20px",
                 fontWeight: "lighter",
                 marginRight: "5px",
-                fill: "#9d9d9d",
-              }}></AddCircleOutlineIcon>
+                // fill: "#9d9d9d",
+              }}
+              className="add_task_icon"></AddCircleOutlineIcon>
             <p
               style={{
                 fontSize: "14px",
                 fontWeight: "500",
                 margin: "0px",
                 padding: "0px",
-                color: "#9d9d9d",
-              }}>
+                // color: "#9d9d9d",
+              }}
+              className="add_task_text">
               Add a task
             </p>
           </Button>
         </CardContent>
       </Card>
+      {cards}
     </div>
   );
 }
 
-export default MainAppKanban;
+export default MainAppKanbanCard;

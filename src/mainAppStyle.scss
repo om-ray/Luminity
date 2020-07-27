@@ -19,21 +19,30 @@ i {
 
 .main_app {
   display: flex;
+  overflow: hidden;
 }
 
 .main_app_tasks {
+  margin-left: 340px;
+  height: 100vh;
   width: fit-content;
+  overflow-x: scroll;
 }
 
 .main_app_tasks_kanban {
-  width: calc(100vh - 350px);
+  width: 100%;
+  margin-top: 60px;
+  display: flex;
 }
 
 .main_app_nav {
+  z-index: 100;
+  position: fixed;
   width: 340px;
   min-height: 100vh;
   padding: 10px 15px;
   border-right: #2c2c2c solid 1px;
+  background-color: #141415;
 }
 
 .group_name_title_container {
@@ -142,9 +151,76 @@ i {
   margin: 15px 10px;
 }
 
+.kanban_day_date_dotm {
+  color: #a0a0a0;
+}
+
+.add_task_container {
+  background-color: #232325;
+  &_content {
+    background-color: #232325;
+  }
+  .add_task_icon {
+    fill: #585859;
+  }
+  .add_task_text {
+    color: #232325;
+  }
+}
+
+#today {
+  .add_task_container {
+    background-color: #232325;
+    &_content {
+      background-color: #232325;
+    }
+    .add_task_icon {
+      fill: #585859;
+    }
+    .add_task_text {
+      color: #9d9d9d;
+    }
+  }
+
+  .task_progress {
+    background-color: #1f1f1e;
+
+    &_bar {
+      background-color: #4dcd7d;
+    }
+  }
+}
+
 .today_btn {
   font-size: 14px;
   p {
     margin: 0;
+  }
+}
+
+.before_today {
+  .kanban_day_date_dotw {
+    color: #868686;
+  }
+  .kanban_day_date_dotm {
+    color: #5a5a5a;
+  }
+  .task_progress {
+    background-color: #141415;
+    &_bar {
+      background-color: #141415;
+    }
+  }
+  .add_task_container {
+    background-color: #1c1c1d;
+    &_content {
+      background-color: #1c1c1d;
+    }
+    .add_task_icon {
+      fill: #3b3b3b;
+    }
+    .add_task_text {
+      color: #1c1c1d;
+    }
   }
 }
