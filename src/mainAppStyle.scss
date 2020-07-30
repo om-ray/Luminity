@@ -17,6 +17,10 @@ i {
   font-size: 20px;
 }
 
+body {
+  overflow-y: hidden;
+}
+
 .main_app {
   display: flex;
   overflow: hidden;
@@ -30,7 +34,7 @@ i {
 }
 
 .main_app_tasks_kanban {
-  width: 100%;
+  width: calc(100vw - 341px - 250px);
   margin-top: 60px;
   display: flex;
 }
@@ -78,12 +82,22 @@ i {
   padding: 10px;
 }
 
+.calendar_times {
+  &::after {
+    content: "";
+    display: inline-block;
+    border-top: 1px solid #2c2c2c;
+    width: 100%;
+    margin: 0 -100% 1.5% 5px;
+  }
+}
 .tasks_nav_bar {
   color: #e6e6e6;
   display: flex;
   justify-content: space-between;
-  width: calc(100vw - 350px);
+  width: calc(100vw - 330px - 250px);
   height: 60px;
+  background-color: #141415;
   border-bottom: solid #2c2c2c 1px;
 }
 

@@ -4,31 +4,25 @@ import moment from "moment";
 import MainAppKanbanCard from "./main_app_kanban_cards";
 import { useState } from "react";
 import useForceUpdate from "use-force-update";
-
-let daysList = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
+import MainAppSideBar from "./main_app_side_bar";
 
 // let date = new Date();
 let boards = [];
-let todayCard = moment().date();
+let todayCard = moment.utc().date();
 let addCardsMod = 0;
 
 let DAYS = () => {
   let days = [];
-  let dateStart = moment().startOf("month").add(addCardsMod, "month");
-  let dateEnd = moment()
+  let dateStart = moment.utc().startOf("month").add(addCardsMod, "month");
+  let dateEnd = moment
+    .utc()
     .endOf("month")
-    .subtract(1, "days")
-    .add(addCardsMod, "month");
+    .add(addCardsMod, "month")
+    .subtract(1, "days");
   while (dateEnd.diff(dateStart, "days") >= 0) {
     days.push({
+      cal_date: dateStart.format("D"),
+      cal_day: dateStart.format("ddd"),
       date: dateStart.format("MMMM D"),
       day: dateStart.format("dddd"),
     });
@@ -36,11 +30,11 @@ let DAYS = () => {
   }
   return days;
 };
+let daysArrayOg = DAYS();
 let daysArray = DAYS();
 
 if (typeof window !== "undefined" && typeof document !== "undefined") {
   let main_app_kanban = document.getElementById("main_app_tasks");
-  let kanban_board = document.getElementById("kanban_board_container");
   let kanban_today = document.getElementById("today").getBoundingClientRect();
   let today_btn = document.getElementById("today_btn");
   let isDown = false;
@@ -48,7 +42,7 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
   let scrollLeft;
 
   window.onload = function () {
-    main_app_kanban.scrollTo(kanban_today.x - 340, kanban_today.y);
+    main_app_kanban.scrollTo(kanban_today.x - 340, -60);
   };
 
   today_btn.onclick = function () {
@@ -56,6 +50,7 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
   };
 
   main_app_kanban.addEventListener("mousedown", (e) => {
+    e.stopPropagation();
     isDown = true;
     main_app_kanban.classList.add("active");
     startX = e.pageX - main_app_kanban.offsetLeft;
@@ -73,6 +68,7 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
   });
 
   main_app_kanban.addEventListener("mousemove", (e) => {
+    e.stopPropagation();
     if (!isDown) return;
     e.preventDefault();
     let x = e.pageX - main_app_kanban.offsetLeft;
@@ -80,7 +76,7 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
     main_app_kanban.scrollLeft = scrollLeft - walk;
   });
 
-  main_app_kanban.addEventListener("scroll", function (ev) {
+  main_app_kanban.addEventListener("scroll", function () {
     if (
       main_app_kanban.scrollLeft ===
       main_app_kanban.scrollWidth - main_app_kanban.clientWidth
@@ -144,11 +140,10 @@ let addToBoards = function () {
 };
 
 pushToBoards();
-let [boardsList, setBoardsList] = ["placeholder", "placeholder"];
+let [boardsList, setBoardsList] = ["", ""];
 
 function TaskView() {
   [boardsList, setBoardsList] = useState(boards);
-  useForceUpdate();
 
   return (
     <div id="main_app_tasks" className="main_app_tasks">
@@ -158,6 +153,9 @@ function TaskView() {
           {boardsList}
         </div>
       </div>
+      <MainAppSideBar
+        day={daysArrayOg[todayCard - 1].cal_day}
+        date={daysArrayOg[todayCard - 1].cal_date}></MainAppSideBar>
     </div>
   );
 }

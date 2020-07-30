@@ -6,7 +6,7 @@ let AddedTaskCard = function () {
   return (
     <Card
       style={{
-        height: "32px",
+        height: "fit-content",
         alignItems: "center",
         display: "flex",
         marginTop: "10px",
@@ -22,29 +22,22 @@ let AddedTaskCard = function () {
         <Button
           style={{
             display: "flex",
-            height: "32px",
+            height: "fit-content",
             textTransform: "none",
             width: "232px",
-            paddingRight: "130px",
           }}>
-          <AddCircleOutlineIcon
-            style={{
-              fontSize: "20px",
-              fontWeight: "lighter",
-              marginRight: "5px",
-              // fill: "#9d9d9d",
-            }}
-            className="add_task_icon"></AddCircleOutlineIcon>
           <p
             style={{
               fontSize: "14px",
               fontWeight: "500",
               margin: "0px",
               padding: "0px",
+              textAlign: "left",
               // color: "#9d9d9d",
             }}
-            className="add_task_text">
-            Add a task
+            className="">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt,
+            rerum.
           </p>
         </Button>
       </CardContent>
