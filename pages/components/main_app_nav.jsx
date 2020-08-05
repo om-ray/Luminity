@@ -21,7 +21,6 @@ function MainAppNav() {
           <DatePicker></DatePicker>
         </div>
       </Box>
-      <hr />
       <Box textAlign="left">
         <Box className="channels_title">CHANNELS</Box>
         <div className="channel_selector_container">
@@ -33,7 +32,6 @@ function MainAppNav() {
           </div>
         </div>
       </Box>
-      <hr />
       <Box textAlign="left">
         <Box className="calendars_title">CALENDARS</Box>
         <div className="calendar_toggle_container">

@@ -21,15 +21,9 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
     let current_time_indicator_container = document.getElementById(
       "current_time_indicator_container"
     );
-    let calendar_time_container = document.getElementById(
-      "calendar_time_container"
-    );
-    let current_time_indicator_bounding_box = current_time_indicator_container.getBoundingClientRect();
-    calendar_time_container.scrollTo({
-      top: current_time_indicator_bounding_box.top,
-      left: 0,
-      behavior: "smooth",
-    });
+    let currentHour = document.getElementById(`${hour}`);
+    let currentHourBoundingBox = currentHour.getBoundingClientRect();
+    calendar_time_container.scrollTo(currentHourBoundingBox.top, 0);
   };
 
   setInterval(() => {
@@ -125,7 +119,7 @@ let MainAppSideBar = function ({ date, day }) {
       <div
         id="current_time_indicator_container"
         style={{
-          position: "absolute",
+          position: "fixed",
           right: "15px",
           width: "180px",
           zIndex: "1",

@@ -3,7 +3,6 @@ import MainTaskNav from "./main_app_tasks_nav";
 import moment from "moment";
 import MainAppKanbanCard from "./main_app_kanban_cards";
 import { useState } from "react";
-import useForceUpdate from "use-force-update";
 import MainAppSideBar from "./main_app_side_bar";
 
 // let date = new Date();
@@ -42,11 +41,17 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
   let scrollLeft;
 
   window.onload = function () {
-    main_app_kanban.scrollTo(kanban_today.x - 340, -60);
+    // main_app_kanban.scrollTo(kanban_today.x - 700, kanban_today.y);
+    main_app_kanban.scrollLeft =
+      kanban_today.left + main_app_kanban.scrollWidth / 7.77;
+    main_app_kanban.scrollTop = 0;
   };
 
   today_btn.onclick = function () {
-    main_app_kanban.scrollTo(kanban_today.x, kanban_today.y);
+    main_app_kanban.scrollLeft =
+      kanban_today.left + main_app_kanban.scrollWidth;
+    main_app_kanban.scrollTop = 0;
+    // main_app_kanban.scrollTo(kanban_today.x, kanban_today.y);
   };
 
   main_app_kanban.addEventListener("mousedown", (e) => {
