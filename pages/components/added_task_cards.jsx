@@ -5,6 +5,7 @@ import {
   Button,
   FormControlLabel,
   Checkbox,
+  TextareaAutosize,
 } from "@material-ui/core";
 import CheckCircleOutline from "@material-ui/icons/CheckCircleOutline";
 import CheckSharpIcon from "@material-ui/icons/CheckSharp";
@@ -85,7 +86,22 @@ let AddedTaskCard = function ({ data }) {
                 />
               }
             />
-            {data}
+            <TextareaAutosize
+              placeholder="Task description..."
+              style={{
+                resize: "none",
+                outline: "none",
+                border: "none",
+                backgroundColor: "inherit",
+                color: "#e6e6e6",
+                WebkitTouchCallout: "initial",
+                WebkitUserSelect: "initial",
+                KhtmlUserSelect: "initial",
+                MozUserSelect: "initial",
+                MsUserSelect: "initial",
+                UserSelect: "initial",
+              }}
+              autoFocus></TextareaAutosize>
           </div>
         </Button>
       </CardContent>

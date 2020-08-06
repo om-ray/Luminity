@@ -18,9 +18,6 @@ console.log(TIMES());
 
 if (typeof window !== "undefined" && typeof document !== "undefined") {
   window.onload = function () {
-    let current_time_indicator_container = document.getElementById(
-      "current_time_indicator_container"
-    );
     let currentHour = document.getElementById(`${hour}`);
     let currentHourBoundingBox = currentHour.getBoundingClientRect();
     calendar_time_container.scrollTo(currentHourBoundingBox.top, 0);
@@ -48,6 +45,7 @@ let MainAppSideBar = function ({ date, day }) {
       <div
         style={{
           position: "fixed",
+          zIndex: 1,
           width: "100%",
           backgroundColor: "#232325",
           height: "145px",
@@ -120,9 +118,9 @@ let MainAppSideBar = function ({ date, day }) {
         id="current_time_indicator_container"
         style={{
           position: "fixed",
-          right: "15px",
-          width: "180px",
-          zIndex: "1",
+          right: "0px",
+          width: "200px",
+          zIndex: 0,
         }}>
         <hr style={{ borderColor: "#A64537" }} />
       </div>
@@ -130,10 +128,10 @@ let MainAppSideBar = function ({ date, day }) {
         id="calendar_time_container"
         style={{
           height: "calc(100% - 145px)",
-          overflowY: "auto",
+          overflowY: "scroll",
           marginTop: "145px",
         }}>
-        {TIMES().map((time, i) => {
+        {TIMES().map((time) => {
           return (
             <div key={time}>
               <p
@@ -145,9 +143,9 @@ let MainAppSideBar = function ({ date, day }) {
                   fontWeight: "600",
                   lineHeight: "60px",
                   color: "#7c7c7c",
-                  marginLeft: "-150px",
+                  marginLeft: "-200px",
                   textAlign: "right",
-                  width: "200px",
+                  width: "250px",
                 }}>
                 {time}
               </p>

@@ -115,7 +115,7 @@ function MainAppKanbanCard({ id, date, days, className }) {
           </Button>
         </CardContent>
       </Card>
-      {cards}
+      <div>{cards}</div>
     </div>
   );
 }
