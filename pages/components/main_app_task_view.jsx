@@ -43,7 +43,7 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
   window.onload = function () {
     // main_app_kanban.scrollTo(kanban_today.x - 700, kanban_today.y);
     main_app_kanban.scrollLeft =
-      kanban_today.left + main_app_kanban.scrollWidth / 7.77;
+      kanban_today.left + main_app_kanban.scrollWidth / 3.11;
     main_app_kanban.scrollTop = 0;
   };
 

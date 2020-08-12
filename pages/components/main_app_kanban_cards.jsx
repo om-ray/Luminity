@@ -4,16 +4,18 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import { useState } from "react";
 import AddedTaskCard from "./added_task_cards";
 
-let [cards, setCards] = ["", ""];
 function MainAppKanbanCard({ id, date, days, className }) {
   let addedCards = [];
+  let [cards, setCards] = useState(addedCards);
   let addTaskCard = function (key) {
     addedCards.push(
-      <AddedTaskCard key={addedCards.length - 1} data={key}></AddedTaskCard>
+      <AddedTaskCard
+        key={key + JSON.stringify(addedCards.length - 1)}
+        data={key}
+        initialFocus={true}></AddedTaskCard>
     );
     return addedCards;
   };
-  [cards, setCards] = useState(addedCards);
 
   return (
     <div

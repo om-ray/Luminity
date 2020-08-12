@@ -22,7 +22,6 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
     let currentHourBoundingBox = currentHour.getBoundingClientRect();
     calendar_time_container.scrollTo(currentHourBoundingBox.top, 0);
   };
-
   setInterval(() => {
     let hour = moment().format("h a");
     let minutes = JSON.parse(moment().format("m"));
