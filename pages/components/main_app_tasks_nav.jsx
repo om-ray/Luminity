@@ -2,12 +2,10 @@ import React from "react";
 import { Box, IconButton, Link } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { CollapseLeftBtn } from "./collapse_btn";
-import moment from "moment";
-import { useState } from "react";
 
 function TaskViewNav() {
   return (
-    <Box alignContent="right" textAlign="right" position="fixed">
+    <Box alignContent="right" textAlign="right" position="fixed" left="341px">
       <div className="tasks_nav_bar">
         <Box display="flex" className="task_channel_title">
           <CollapseLeftBtn></CollapseLeftBtn>

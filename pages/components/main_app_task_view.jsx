@@ -34,61 +34,72 @@ let daysArray = DAYS();
 
 if (typeof window !== "undefined" && typeof document !== "undefined") {
   let main_app_kanban = document.getElementById("main_app_tasks");
-  let kanban_today = document.getElementById("today").getBoundingClientRect();
+  console.log(main_app_kanban);
+  let kanban_today;
+  if (document.getElementById("today")) {
+    kanban_today = document.getElementById("today").getBoundingClientRect();
+  }
   let today_btn = document.getElementById("today_btn");
   let isDown = false;
   let startX;
   let scrollLeft;
 
   window.onload = function () {
-    // main_app_kanban.scrollTo(kanban_today.x - 700, kanban_today.y);
-    main_app_kanban.scrollLeft =
-      kanban_today.left + main_app_kanban.scrollWidth / 3.11;
-    main_app_kanban.scrollTop = 0;
-  };
-
-  today_btn.onclick = function () {
-    main_app_kanban.scrollLeft =
-      kanban_today.left + main_app_kanban.scrollWidth;
-    main_app_kanban.scrollTop = 0;
-    // main_app_kanban.scrollTo(kanban_today.x, kanban_today.y);
-  };
-
-  main_app_kanban.addEventListener("mousedown", (e) => {
-    e.stopPropagation();
-    isDown = true;
-    main_app_kanban.classList.add("active");
-    startX = e.pageX - main_app_kanban.offsetLeft;
-    scrollLeft = main_app_kanban.scrollLeft;
-  });
-
-  main_app_kanban.addEventListener("mouseleave", () => {
-    isDown = false;
-    main_app_kanban.classList.remove("active");
-  });
-
-  main_app_kanban.addEventListener("mouseup", () => {
-    isDown = false;
-    main_app_kanban.classList.remove("active");
-  });
-
-  main_app_kanban.addEventListener("mousemove", (e) => {
-    e.stopPropagation();
-    if (!isDown) return;
-    e.preventDefault();
-    let x = e.pageX - main_app_kanban.offsetLeft;
-    let walk = (x - startX) * 1; //scroll-fast
-    main_app_kanban.scrollLeft = scrollLeft - walk;
-  });
-
-  main_app_kanban.addEventListener("scroll", function () {
-    if (
-      main_app_kanban.scrollLeft ===
-      main_app_kanban.scrollWidth - main_app_kanban.clientWidth
-    ) {
-      infiniScroll();
+    if (kanban_today.left !== 0) {
+      console.log(kanban_today.left);
+      // main_app_kanban.scrollTo(kanban_today.x - 700, kanban_today.y);
+      main_app_kanban.scrollLeft =
+        kanban_today.left + main_app_kanban.scrollWidth;
+      main_app_kanban.scrollTop = 0;
     }
-  });
+  };
+
+  if (today_btn) {
+    today_btn.onclick = function () {
+      main_app_kanban.scrollLeft =
+        kanban_today.left + main_app_kanban.scrollWidth;
+      main_app_kanban.scrollTop = 0;
+      // main_app_kanban.scrollTo(kanban_today.x, kanban_today.y);
+    };
+  }
+
+  // main_app_kanban.addEventListener("mousedown", (e) => {
+  //   e.stopPropagation();
+  //   isDown = true;
+  //   main_app_kanban.classList.add("active");
+  //   startX = e.pageX - main_app_kanban.offsetLeft;
+  //   scrollLeft = main_app_kanban.scrollLeft;
+  // });
+
+  // main_app_kanban.addEventListener("mouseleave", () => {
+  //   isDown = false;
+  //   main_app_kanban.classList.remove("active");
+  // });
+
+  // main_app_kanban.addEventListener("mouseup", () => {
+  //   isDown = false;
+  //   main_app_kanban.classList.remove("active");
+  // });
+
+  // main_app_kanban.addEventListener("mousemove", (e) => {
+  //   e.stopPropagation();
+  //   if (!isDown) return;
+  //   e.preventDefault();
+  //   let x = e.pageX - main_app_kanban.offsetLeft;
+  //   let walk = (x - startX) * 1; //scroll-fast
+  //   main_app_kanban.scrollLeft = scrollLeft - walk;
+  // });
+
+  if (main_app_kanban) {
+    main_app_kanban.addEventListener("scroll", function () {
+      if (
+        main_app_kanban.scrollLeft ===
+        main_app_kanban.scrollWidth - main_app_kanban.clientWidth
+      ) {
+        infiniScroll();
+      }
+    });
+  }
 }
 
 let infiniScroll = function () {
@@ -151,17 +162,19 @@ function TaskView() {
   [boardsList, setBoardsList] = useState(boards);
 
   return (
-    <div id="main_app_tasks" className="main_app_tasks">
+    <>
       <MainTaskNav></MainTaskNav>
-      <div id="kanban_board_container" className="main_app_tasks_kanban">
-        <div style={{ display: "flex" }} id="kanban_board">
-          {boardsList}
+      <div id="main_app_tasks" className="main_app_tasks">
+        <div id="kanban_board_container" className="main_app_tasks_kanban">
+          <div style={{ display: "flex" }} id="kanban_board">
+            {boardsList}
+          </div>
         </div>
       </div>
       <MainAppSideBar
         day={daysArrayOg[todayCard - 1].cal_day}
         date={daysArrayOg[todayCard - 1].cal_date}></MainAppSideBar>
-    </div>
+    </>
   );
 }
 

@@ -1,20 +1,43 @@
 import React from "react";
-import { Card, CardContent, Button } from "@material-ui/core";
+import { Card, CardContent, Button, Box } from "@material-ui/core";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import { useState } from "react";
 import AddedTaskCard from "./added_task_cards";
+let parse = require("html-react-parser");
 
-function MainAppKanbanCard({ id, date, days, className }) {
+let MainAppKanbanCard = React.forwardRef(function (
+  { id, date, days, className },
+  ref
+) {
   let addedCards = [];
   let [cards, setCards] = useState(addedCards);
+
   let addTaskCard = function (key) {
     addedCards.push(
       <AddedTaskCard
         key={key + JSON.stringify(addedCards.length - 1)}
-        data={key}
+        data={key + JSON.stringify(addedCards.length - 1)}
+        date={date}
+        index={addedCards.length - 1}
         initialFocus={true}></AddedTaskCard>
     );
     return addedCards;
+  };
+
+  let drop = function (e) {
+    e.preventDefault();
+    let card_id = e.dataTransfer.getData("card_id");
+    let card = document.getElementById(card_id);
+    if (card) {
+      card.style.display = "block";
+      e.target.appendChild(card);
+      addedCards.push(parse(card.outerHTML));
+      setCards(addedCards);
+    }
+  };
+
+  let dragOver = function (e) {
+    e.preventDefault();
   };
 
   return (
@@ -117,9 +140,23 @@ function MainAppKanbanCard({ id, date, days, className }) {
           </Button>
         </CardContent>
       </Card>
-      <div>{cards}</div>
+      <div id={date} onDrop={drop} onDragOver={dragOver}>
+        <div
+          style={{
+            height: "34px",
+            width: "232px",
+          }}>
+          {cards}
+          <div
+            draggable="false"
+            style={{
+              height: "34px",
+              width: "232px",
+            }}></div>
+        </div>
+      </div>
     </div>
   );
-}
+});
 
 export default MainAppKanbanCard;

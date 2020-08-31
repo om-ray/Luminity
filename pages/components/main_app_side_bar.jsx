@@ -2,6 +2,8 @@ import React from "react";
 import { Box } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import moment from "moment";
+import CalendarEvent from "./CalendarEvent";
+import { useState } from "react";
 
 let TIMES = () => {
   let times = [];
@@ -26,13 +28,60 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
     let hour = moment().format("h a");
     let minutes = JSON.parse(moment().format("m"));
     let currentHour = document.getElementById(`${hour}`);
-    let currentHourTop = currentHour.getBoundingClientRect().top;
-    let currentMinuteOffset = currentHourTop + minutes + 30 + "px";
-    current_time_indicator_container.style.top = `${currentMinuteOffset}`;
+    let currentHourTop;
+    if (currentHour) {
+      currentHourTop = currentHour.getBoundingClientRect().top;
+      let currentMinuteOffset = currentHourTop + minutes + "px";
+      document.getElementById(
+        "current_time_indicator_container"
+      ).style.top = `${currentMinuteOffset}`;
+    }
   }, 5);
 }
 
+let eventsArray = [];
 let MainAppSideBar = function ({ date, day }) {
+  let mousePos = { x: 0, y: 0 };
+  let [calendarEvents, setCalendarEvents] = useState(() => eventsArray);
+
+  let drop = function (e) {
+    e.preventDefault();
+    console.log(e.clientX);
+    console.log(e.clientY);
+    mousePos.x = e.clientX;
+    mousePos.y = e.clientY;
+    let card_id = e.dataTransfer.getData("card_id");
+    let card = document.getElementById(card_id);
+    let card_text = card.getElementsByTagName("textarea")[0].value;
+    console.log(card_text);
+    if (card) {
+      card.style.display = "block";
+      eventsArray.push(
+        <CalendarEvent
+          key={`id: ${card_id} text: ${card_text}`}
+          style={{
+            position: "absolute",
+            backgroundColor: "#7badff",
+            left: "50px",
+            width: "calc(100% - 70px)",
+            overflow: "auto",
+            resize: "vertical",
+            borderRadius: "2px",
+            height: "30px",
+            top: e.clientY - 145,
+          }}
+          text={card_text}></CalendarEvent>
+      );
+      console.log("eventsArray:", ...eventsArray);
+      setCalendarEvents(...eventsArray);
+      console.log("calendarEvents:", calendarEvents);
+    }
+  };
+
+  let dragOver = function (e) {
+    e.preventDefault();
+  };
+
   return (
     <Box
       position="absolute"
@@ -114,43 +163,58 @@ let MainAppSideBar = function ({ date, day }) {
         </div>
       </div>
       <div
-        id="current_time_indicator_container"
+        id={date}
+        onDrop={drop}
+        onDragOver={dragOver}
         style={{
-          position: "fixed",
-          right: "0px",
-          width: "200px",
-          zIndex: 0,
+          position: "absolute",
+          width: "100%",
+          height: "100vh",
         }}>
-        <hr style={{ borderColor: "#A64537" }} />
-      </div>
-      <div
-        id="calendar_time_container"
-        style={{
-          height: "calc(100% - 145px)",
-          overflowY: "scroll",
-          marginTop: "145px",
-        }}>
-        {TIMES().map((time) => {
-          return (
-            <div key={time}>
-              <p
-                id={time}
-                className="calendar_times"
-                style={{
-                  textTransform: "uppercase",
-                  fontSize: "10px",
-                  fontWeight: "600",
-                  lineHeight: "60px",
-                  color: "#7c7c7c",
-                  marginLeft: "-200px",
-                  textAlign: "right",
-                  width: "250px",
-                }}>
-                {time}
-              </p>
-            </div>
-          );
-        })}
+        <div
+          id="current_time_indicator_container"
+          style={{
+            position: "fixed",
+            right: "0px",
+            width: "200px",
+            zIndex: 0,
+          }}>
+          <hr style={{ borderColor: "#A64537" }} />
+        </div>
+        <div
+          id="calendar_time_container"
+          style={{
+            position: "absolute",
+            height: "calc(100% - 145px)",
+            width: "100%",
+            overflowY: "scroll",
+            marginTop: "145px",
+          }}>
+          <div style={{ position: "absolute", height: "100vh", width: "100%" }}>
+            {calendarEvents}
+          </div>
+          {TIMES().map((time) => {
+            return (
+              <div style={{}} key={time} id={time}>
+                <p
+                  id={time}
+                  className="calendar_times"
+                  style={{
+                    textTransform: "uppercase",
+                    fontSize: "10px",
+                    fontWeight: "600",
+                    height: "60px",
+                    color: "#7c7c7c",
+                    marginLeft: "-200px",
+                    textAlign: "right",
+                    width: "250px",
+                  }}>
+                  {time}
+                </p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </Box>
   );
