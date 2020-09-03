@@ -58,7 +58,9 @@ let MainAppSideBar = function ({ date, day }) {
       card.style.display = "block";
       eventsArray.push(
         <CalendarEvent
-          key={`id: ${card_id} text: ${card_text}`}
+          key={`id: ${card_id} text: ${card_text} place: ${
+            eventsArray.length + 1
+          }`}
           style={{
             position: "absolute",
             backgroundColor: "#7badff",
@@ -73,7 +75,7 @@ let MainAppSideBar = function ({ date, day }) {
           text={card_text}></CalendarEvent>
       );
       console.log("eventsArray:", ...eventsArray);
-      setCalendarEvents(...eventsArray);
+      setCalendarEvents([...eventsArray]);
       console.log("calendarEvents:", calendarEvents);
     }
   };
@@ -203,7 +205,7 @@ let MainAppSideBar = function ({ date, day }) {
                     textTransform: "uppercase",
                     fontSize: "10px",
                     fontWeight: "600",
-                    height: "60px",
+                    height: "7.5em",
                     color: "#7c7c7c",
                     marginLeft: "-200px",
                     textAlign: "right",
