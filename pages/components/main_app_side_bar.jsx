@@ -19,22 +19,14 @@ let TIMES = () => {
 console.log(TIMES());
 
 if (typeof window !== "undefined" && typeof document !== "undefined") {
-  window.onload = function () {
-    let currentHour = document.getElementById(`${hour}`);
-    let currentHourBoundingBox = currentHour.getBoundingClientRect();
-    calendar_time_container.scrollTo(currentHourBoundingBox.top, 0);
-  };
   setInterval(() => {
     let hour = moment().format("h a");
     let minutes = JSON.parse(moment().format("m"));
     let currentHour = document.getElementById(`${hour}`);
-    let currentHourTop;
     if (currentHour) {
-      currentHourTop = currentHour.getBoundingClientRect().top;
+      let currentHourTop = currentHour.getBoundingClientRect().top;
       let currentMinuteOffset = currentHourTop + minutes + "px";
-      document.getElementById(
-        "current_time_indicator_container"
-      ).style.top = `${currentMinuteOffset}`;
+      document.getElementById("current_time_indicator_container").style.top = `${currentMinuteOffset}`;
     }
   }, 5);
 }
@@ -50,6 +42,11 @@ let MainAppSideBar = function ({ date, day }) {
     console.log(e.clientY);
     mousePos.x = e.clientX;
     mousePos.y = e.clientY;
+    let calendar_event_container = document.getElementById("calendar_event_container");
+    let calendar_event_container_top = calendar_event_container.getBoundingClientRect().top + window.scrollY;
+    console.log(calendar_event_container_top);
+    let time_container_height = document.getElementById("12 am").clientHeight;
+    let time = (e.clientY - calendar_event_container_top) / time_container_height;
     let card_id = e.dataTransfer.getData("card_id");
     let card = document.getElementById(card_id);
     let card_text = card.getElementsByTagName("textarea")[0].value;
@@ -58,9 +55,7 @@ let MainAppSideBar = function ({ date, day }) {
       card.style.display = "block";
       eventsArray.push(
         <CalendarEvent
-          key={`id: ${card_id} text: ${card_text} place: ${
-            eventsArray.length + 1
-          }`}
+          key={`id: ${card_id} text: ${card_text} place: ${eventsArray.length + 1}`}
           style={{
             position: "absolute",
             backgroundColor: "#7badff",
@@ -70,13 +65,12 @@ let MainAppSideBar = function ({ date, day }) {
             resize: "vertical",
             borderRadius: "2px",
             height: "30px",
-            top: e.clientY - 145,
+            top: e.clientY - calendar_event_container_top,
           }}
-          text={card_text}></CalendarEvent>
+          text={card_text}
+          time={time}></CalendarEvent>
       );
-      console.log("eventsArray:", ...eventsArray);
       setCalendarEvents([...eventsArray]);
-      console.log("calendarEvents:", calendarEvents);
     }
   };
 
@@ -85,13 +79,7 @@ let MainAppSideBar = function ({ date, day }) {
   };
 
   return (
-    <Box
-      position="absolute"
-      right="0"
-      top="0"
-      height="100vh"
-      width="250px"
-      bgcolor="#232325">
+    <Box position="absolute" right="0" top="0" height="100vh" width="250px" bgcolor="#232325">
       <div
         style={{
           position: "fixed",
@@ -192,7 +180,7 @@ let MainAppSideBar = function ({ date, day }) {
             overflowY: "scroll",
             marginTop: "145px",
           }}>
-          <div style={{ position: "absolute", height: "100vh", width: "100%" }}>
+          <div id="calendar_event_container" style={{ position: "absolute", height: "100vh", width: "100%" }}>
             {calendarEvents}
           </div>
           {TIMES().map((time) => {

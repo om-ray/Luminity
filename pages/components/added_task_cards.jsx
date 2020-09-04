@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Card,
-  CardContent,
-  Button,
-  FormControlLabel,
-  Checkbox,
-  TextareaAutosize,
-} from "@material-ui/core";
+import { Card, CardContent, Button, FormControlLabel, Checkbox, TextareaAutosize } from "@material-ui/core";
 import CheckSharpIcon from "@material-ui/icons/CheckSharp";
 import FiberManualRecordRoundedIcon from "@material-ui/icons/FiberManualRecordRounded";
 import { useState } from "react";

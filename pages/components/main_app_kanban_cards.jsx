@@ -5,10 +5,7 @@ import { useState } from "react";
 import AddedTaskCard from "./added_task_cards";
 let parse = require("html-react-parser");
 
-let MainAppKanbanCard = React.forwardRef(function (
-  { id, date, days, className },
-  ref
-) {
+let MainAppKanbanCard = React.forwardRef(function ({ id, date, days, className }, ref) {
   let addedCards = [];
   let [cards, setCards] = useState(addedCards);
 
@@ -59,9 +56,7 @@ let MainAppKanbanCard = React.forwardRef(function (
         <CardContent style={{ padding: "0px" }}>
           <div className="kanban_day_label_container">
             <div>
-              <span
-                style={{ fontSize: "24px", fontWeight: "600" }}
-                className="kanban_day_date_dotw">
+              <span style={{ fontSize: "24px", fontWeight: "600" }} className="kanban_day_date_dotw">
                 {days}
               </span>
             </div>

@@ -13,11 +13,7 @@ let addCardsMod = 0;
 let DAYS = () => {
   let days = [];
   let dateStart = moment.utc().startOf("month").add(addCardsMod, "month");
-  let dateEnd = moment
-    .utc()
-    .endOf("month")
-    .add(addCardsMod, "month")
-    .subtract(1, "days");
+  let dateEnd = moment.utc().endOf("month").add(addCardsMod, "month").subtract(1, "days");
   while (dateEnd.diff(dateStart, "days") >= 0) {
     days.push({
       cal_date: dateStart.format("D"),
@@ -48,16 +44,14 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
     if (kanban_today.left !== 0) {
       console.log(kanban_today.left);
       // main_app_kanban.scrollTo(kanban_today.x - 700, kanban_today.y);
-      main_app_kanban.scrollLeft =
-        kanban_today.left + main_app_kanban.scrollWidth;
+      main_app_kanban.scrollLeft = kanban_today.left + main_app_kanban.scrollWidth;
       main_app_kanban.scrollTop = 0;
     }
   };
 
   if (today_btn) {
     today_btn.onclick = function () {
-      main_app_kanban.scrollLeft =
-        kanban_today.left + main_app_kanban.scrollWidth;
+      main_app_kanban.scrollLeft = kanban_today.left + main_app_kanban.scrollWidth;
       main_app_kanban.scrollTop = 0;
       // main_app_kanban.scrollTo(kanban_today.x, kanban_today.y);
     };
@@ -92,10 +86,7 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
 
   if (main_app_kanban) {
     main_app_kanban.addEventListener("scroll", function () {
-      if (
-        main_app_kanban.scrollLeft ===
-        main_app_kanban.scrollWidth - main_app_kanban.clientWidth
-      ) {
+      if (main_app_kanban.scrollLeft === main_app_kanban.scrollWidth - main_app_kanban.clientWidth) {
         infiniScroll();
       }
     });
@@ -114,13 +105,7 @@ let infiniScroll = function () {
 let pushToBoards = function () {
   for (let i = 0; i < daysArray.length; i++) {
     if (i == todayCard - 1) {
-      boards.push(
-        <MainAppKanbanCard
-          id="today"
-          key={daysArray[i].date}
-          date={daysArray[i].date}
-          days={daysArray[i].day}></MainAppKanbanCard>
-      );
+      boards.push(<MainAppKanbanCard id="today" key={daysArray[i].date} date={daysArray[i].date} days={daysArray[i].day}></MainAppKanbanCard>);
     } else if (i < todayCard - 1) {
       boards.push(
         <MainAppKanbanCard
@@ -132,11 +117,7 @@ let pushToBoards = function () {
       );
     } else {
       boards.push(
-        <MainAppKanbanCard
-          id={`notToday${i}`}
-          key={daysArray[i].date}
-          date={daysArray[i].date}
-          days={daysArray[i].day}></MainAppKanbanCard>
+        <MainAppKanbanCard id={`notToday${i}`} key={daysArray[i].date} date={daysArray[i].date} days={daysArray[i].day}></MainAppKanbanCard>
       );
     }
   }
@@ -145,12 +126,7 @@ let pushToBoards = function () {
 
 let addToBoards = function () {
   for (let i = 0; i < daysArray.length; i++) {
-    boards.push(
-      <MainAppKanbanCard
-        key={daysArray[i].date}
-        date={daysArray[i].date}
-        days={daysArray[i].day}></MainAppKanbanCard>
-    );
+    boards.push(<MainAppKanbanCard key={daysArray[i].date} date={daysArray[i].date} days={daysArray[i].day}></MainAppKanbanCard>);
   }
   return boards;
 };
@@ -171,9 +147,7 @@ function TaskView() {
           </div>
         </div>
       </div>
-      <MainAppSideBar
-        day={daysArrayOg[todayCard - 1].cal_day}
-        date={daysArrayOg[todayCard - 1].cal_date}></MainAppSideBar>
+      <MainAppSideBar day={daysArrayOg[todayCard - 1].cal_day} date={daysArrayOg[todayCard - 1].cal_date}></MainAppSideBar>
     </>
   );
 }
