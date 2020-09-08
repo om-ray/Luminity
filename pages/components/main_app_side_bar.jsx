@@ -1,6 +1,7 @@
 import React from "react";
-import { Box } from "@material-ui/core";
+import { Box, IconButton } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
 import moment from "moment";
 import CalendarEvent from "./CalendarEvent";
 import { useState } from "react";
@@ -18,6 +19,8 @@ let TIMES = () => {
 
 console.log(TIMES());
 
+let multiplier = 1;
+
 if (typeof window !== "undefined" && typeof document !== "undefined") {
   setInterval(() => {
     let hour = moment().format("h a");
@@ -25,7 +28,7 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
     let currentHour = document.getElementById(`${hour}`);
     if (currentHour) {
       let currentHourTop = currentHour.getBoundingClientRect().top;
-      let currentMinuteOffset = currentHourTop + minutes + "px";
+      let currentMinuteOffset = currentHourTop + minutes * multiplier + "px";
       document.getElementById("current_time_indicator_container").style.top = `${currentMinuteOffset}`;
     }
   }, 5);
@@ -35,6 +38,7 @@ let eventsArray = [];
 let MainAppSideBar = function ({ date, day }) {
   let mousePos = { x: 0, y: 0 };
   let [calendarEvents, setCalendarEvents] = useState(() => eventsArray);
+  let [maximized, setMaximized] = useState(() => false);
 
   let drop = function (e) {
     e.preventDefault();
@@ -118,11 +122,37 @@ let MainAppSideBar = function ({ date, day }) {
               borderRight: "#2c2c2c solid 1px",
               borderBottom: "#2c2c2c solid 1px",
             }}>
-            <AddIcon
-              style={{
-                fill: "#a0a0a0",
-                fontSize: "20px",
-              }}></AddIcon>
+            <IconButton
+              onClick={() => {
+                multiplier = 2;
+                if (maximized == false) {
+                  let timeNodeArray = Array.from(document.querySelectorAll(".calendar_times"));
+                  timeNodeArray.forEach((i) => {
+                    i.className = "calendar_times_maximized";
+                  });
+                } else {
+                  let timeNodeArray = Array.from(document.querySelectorAll(".calendar_times_maximized"));
+                  timeNodeArray.forEach((i) => {
+                    i.className = "calendar_times";
+                  });
+                }
+                setMaximized(!maximized);
+              }}>
+              {maximized && (
+                <RemoveIcon
+                  style={{
+                    fill: "#a0a0a0",
+                    fontSize: "20px",
+                  }}></RemoveIcon>
+              )}
+              {!maximized && (
+                <AddIcon
+                  style={{
+                    fill: "#a0a0a0",
+                    fontSize: "20px",
+                  }}></AddIcon>
+              )}
+            </IconButton>
           </div>
           <div style={{ marginLeft: "10px" }}>
             <p
@@ -193,7 +223,6 @@ let MainAppSideBar = function ({ date, day }) {
                     textTransform: "uppercase",
                     fontSize: "10px",
                     fontWeight: "600",
-                    height: "7.5em",
                     color: "#7c7c7c",
                     marginLeft: "-200px",
                     textAlign: "right",
