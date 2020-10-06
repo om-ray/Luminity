@@ -12,7 +12,11 @@ let AddedTaskCard = function ({ data, index, initialFocus, date }) {
   };
 
   let handleBlur = function () {
-    setFocus(false);
+    if (document.getElementById(`${date} + ${data}`)?.getElementsByTagName("textarea")[0].value == "") {
+      setFocus(false);
+    } else {
+      return false;
+    }
   };
 
   let dragStart = function (e) {
@@ -30,14 +34,7 @@ let AddedTaskCard = function ({ data, index, initialFocus, date }) {
 
   return (
     focus && (
-      <div
-        id={date}
-        draggable="true"
-        onDragStart={dragStart}
-        onDragOver={dragOver}
-        // onBlur={handleBlur}
-        // onFocus={handleFocus}
-      >
+      <div id={`${date} + ${data}`} draggable="true" onDragStart={dragStart} onDragOver={dragOver} onBlur={handleBlur} onFocus={handleFocus}>
         <Card
           style={{
             height: "fit-content",
@@ -125,7 +122,7 @@ let AddedTaskCard = function ({ data, index, initialFocus, date }) {
                         </div>
                       }
                       onChange={function (e) {
-                        let taskText = document.getElementById("taskText");
+                        let taskText = document.getElementById(`${date} + ${data}`)?.getElementsByTagName("textarea")[0];
                         if (e.target.checked) {
                           taskText.style.textDecoration = "line-through";
                           taskText.style.color = "#7c7c7c";

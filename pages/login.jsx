@@ -1,8 +1,7 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
-import Nav from "./nav";
-import Footer from "./footer";
-import { Box } from "@material-ui/core";
+import Nav from "./components/nav";
+import { Box, Button } from "@material-ui/core";
+import Footer from "./components/footer";
 
 function Login() {
   return (

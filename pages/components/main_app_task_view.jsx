@@ -7,7 +7,7 @@ import MainAppSideBar from "./main_app_side_bar";
 
 // let date = new Date();
 let boards = [];
-let todayCard = moment.utc().date();
+let todayCard = moment().date();
 let addCardsMod = 0;
 
 let DAYS = () => {
@@ -47,6 +47,14 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
       main_app_kanban.scrollLeft = kanban_today.left + main_app_kanban.scrollWidth;
       main_app_kanban.scrollTop = 0;
     }
+    setTimeout(() => {
+      if (today_btn) {
+        today_btn.click();
+        setTimeout(() => {
+          today_btn.click();
+        }, 10);
+      }
+    }, 0);
   };
 
   if (today_btn) {
@@ -58,24 +66,23 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
   }
 
   // main_app_kanban.addEventListener("mousedown", (e) => {
+  //   e.stopImmediatePropagation();
   //   e.stopPropagation();
   //   isDown = true;
-  //   main_app_kanban.classList.add("active");
   //   startX = e.pageX - main_app_kanban.offsetLeft;
   //   scrollLeft = main_app_kanban.scrollLeft;
   // });
 
   // main_app_kanban.addEventListener("mouseleave", () => {
   //   isDown = false;
-  //   main_app_kanban.classList.remove("active");
   // });
 
   // main_app_kanban.addEventListener("mouseup", () => {
   //   isDown = false;
-  //   main_app_kanban.classList.remove("active");
   // });
 
   // main_app_kanban.addEventListener("mousemove", (e) => {
+  //   e.stopImmediatePropagation();
   //   e.stopPropagation();
   //   if (!isDown) return;
   //   e.preventDefault();

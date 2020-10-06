@@ -4,7 +4,9 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core";
+import { IconButton, makeStyles } from "@material-ui/core";
+import PersonIcon from "@material-ui/icons/Person";
+import { signIn, signOut, useSession } from "next-auth/client";
 
 let useStyles = makeStyles(() => ({
   root: {},
@@ -61,10 +63,18 @@ let useStyles = makeStyles(() => ({
     bottom: 0,
     background: "#141415",
   },
+  signInOutButton: {
+    fontFamily: "Avenir",
+    fontSize: "15px",
+    textTransform: "uppercase",
+    fontWeight: 600,
+  },
 }));
 
 function Nav() {
   const classes = useStyles();
+  const [session, loading] = useSession();
+
   return (
     <AppBar position="static" className={classes.navBar}>
       <Toolbar className={classes.navBar}>
@@ -80,15 +90,21 @@ function Nav() {
             </Link>
           </Button>
           <Button className={classes.avenir}>
-            <Link color="primary" href="/login">
-              Login
-            </Link>
-          </Button>
-          <Button className={classes.avenir}>
             <Link color="primary" href="/mainApp?channel=all#today">
               App
             </Link>
           </Button>
+          {!session && (
+            <Button className={classes.signInOutButton} onClick={signIn}>
+              <PersonIcon></PersonIcon>&nbsp; &nbsp;Sign in
+            </Button>
+          )}
+          {session && (
+            <>
+              <Button onClick={signOut}>Sign out</Button>
+              <h4 className={classes.avenir}>Signed in as {session.user.email}</h4>
+            </>
+          )}
         </div>
       </Toolbar>
     </AppBar>

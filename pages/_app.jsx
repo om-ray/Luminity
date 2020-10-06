@@ -21,14 +21,10 @@ export default function MyApp(props) {
     <React.Fragment>
       <Head>
         <title>My page</title>
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Megrim&display=swap"
-          rel="stylesheet"
-        />
+        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+        <meta name="google-signin-client_id" content="290004955943-cejk2f80n08oe3u1lq0umn8jpgee7hsn.apps.googleusercontent.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Megrim&display=swap" rel="stylesheet" />
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
       </Head>
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}

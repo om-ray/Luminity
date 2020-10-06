@@ -91,9 +91,10 @@ body {
     display: inline-block;
     border-top: 1px solid #2c2c2c;
     width: 100%;
-    margin: 0 -100% 1.5% 5px;
+    margin: -100px -100% 1.5% 5px;
   }
 }
+
 .tasks_nav_bar {
   color: #e6e6e6;
   display: flex;
@@ -125,7 +126,6 @@ body {
       color: #141415;
     }
   }
-
   &:active {
     background-color: rgb(53, 122, 76);
     color: #e6e6e6;

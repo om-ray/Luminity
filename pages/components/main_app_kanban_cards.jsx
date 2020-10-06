@@ -5,8 +5,8 @@ import { useState } from "react";
 import AddedTaskCard from "./added_task_cards";
 let parse = require("html-react-parser");
 
-let MainAppKanbanCard = React.forwardRef(function ({ id, date, days, className }, ref) {
-  let addedCards = [];
+let addedCards = [];
+let MainAppKanbanCard = function ({ id, date, days, className }) {
   let [cards, setCards] = useState(addedCards);
 
   let addTaskCard = function (key) {
@@ -15,6 +15,7 @@ let MainAppKanbanCard = React.forwardRef(function ({ id, date, days, className }
         key={key + JSON.stringify(addedCards.length - 1)}
         data={key + JSON.stringify(addedCards.length - 1)}
         date={date}
+        repeat={false}
         index={addedCards.length - 1}
         initialFocus={true}></AddedTaskCard>
     );
@@ -152,6 +153,6 @@ let MainAppKanbanCard = React.forwardRef(function ({ id, date, days, className }
       </div>
     </div>
   );
-});
+};
 
 export default MainAppKanbanCard;

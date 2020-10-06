@@ -1,8 +1,7 @@
 import React from "react";
-import { typography } from "@material-ui/system/typography";
-import Nav from "./nav";
-import Footer from "./footer";
 import { Box } from "@material-ui/core";
+import Nav from "./components/nav";
+import Footer from "./components/footer";
 
 function About() {
   return (

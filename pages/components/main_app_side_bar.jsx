@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, IconButton } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import moment from "moment";
 import CalendarEvent from "./CalendarEvent";
 import { useState } from "react";
+import { height } from "@material-ui/system";
 
 let TIMES = () => {
   let times = [];
@@ -42,19 +43,19 @@ let MainAppSideBar = function ({ date, day }) {
 
   let drop = function (e) {
     e.preventDefault();
-    console.log(e.clientX);
+    console.log(e.target);
     console.log(e.clientY);
     mousePos.x = e.clientX;
     mousePos.y = e.clientY;
     let calendar_event_container = document.getElementById("calendar_event_container");
     let calendar_event_container_top = calendar_event_container.getBoundingClientRect().top + window.scrollY;
-    console.log(calendar_event_container_top);
-    let time_container_height = document.getElementById("12 am").clientHeight;
-    let time = (e.clientY - calendar_event_container_top) / time_container_height;
+    setInterval(() => {
+      calendar_event_container_top = calendar_event_container.getBoundingClientRect().top + window.scrollY;
+    }, 1);
+    let time = e.target.getAttribute("id");
     let card_id = e.dataTransfer.getData("card_id");
     let card = document.getElementById(card_id);
     let card_text = card.getElementsByTagName("textarea")[0].value;
-    console.log(card_text);
     if (card) {
       card.style.display = "block";
       eventsArray.push(
@@ -65,15 +66,18 @@ let MainAppSideBar = function ({ date, day }) {
             backgroundColor: "#7badff",
             left: "50px",
             width: "calc(100% - 70px)",
-            overflow: "auto",
-            resize: "vertical",
-            borderRadius: "2px",
+            borderRadius: "3px",
             height: "30px",
-            top: e.clientY - calendar_event_container_top,
+            border: "1px solid #2c2c2c",
+            top: Math.round((e.clientY - calendar_event_container_top) / 5) * 5,
+            opacity: "0.8",
           }}
+          id={JSON.stringify(`id: ${card_id} text: ${card_text} place: ${eventsArray.length + 1}`)}
           text={card_text}
-          time={time}></CalendarEvent>
+          time={time}
+          height={30}></CalendarEvent>
       );
+      console.log(eventsArray);
       setCalendarEvents([...eventsArray]);
     }
   };
@@ -184,8 +188,8 @@ let MainAppSideBar = function ({ date, day }) {
       </div>
       <div
         id={date}
-        onDrop={drop}
-        onDragOver={dragOver}
+        // onDrop={drop}
+        // onDragOver={dragOver}
         style={{
           position: "absolute",
           width: "100%",
@@ -211,28 +215,36 @@ let MainAppSideBar = function ({ date, day }) {
             marginTop: "145px",
           }}>
           <div id="calendar_event_container" style={{ position: "absolute", height: "100vh", width: "100%" }}>
+            {TIMES().map((time) => {
+              return (
+                <div onDrop={drop} onDragOver={dragOver} style={{}} key={time} id={time}>
+                  <p
+                    onDragOver={(e) => {
+                      e.preventDefault();
+                      return false;
+                    }}
+                    onDrop={(e) => {
+                      e.preventDefault();
+                      return false;
+                    }}
+                    id={time}
+                    className="calendar_times"
+                    style={{
+                      textTransform: "uppercase",
+                      fontSize: "10px",
+                      fontWeight: "600",
+                      color: "#7c7c7c",
+                      margin: "0px 0px 0px -200px",
+                      textAlign: "right",
+                      width: "250px",
+                    }}>
+                    {time}
+                  </p>
+                </div>
+              );
+            })}
             {calendarEvents}
           </div>
-          {TIMES().map((time) => {
-            return (
-              <div style={{}} key={time} id={time}>
-                <p
-                  id={time}
-                  className="calendar_times"
-                  style={{
-                    textTransform: "uppercase",
-                    fontSize: "10px",
-                    fontWeight: "600",
-                    color: "#7c7c7c",
-                    marginLeft: "-200px",
-                    textAlign: "right",
-                    width: "250px",
-                  }}>
-                  {time}
-                </p>
-              </div>
-            );
-          })}
         </div>
       </div>
     </Box>
