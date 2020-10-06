@@ -68,3 +68,11 @@ export function CollapseRightBtn() {
     </Box>
   );
 }
+
+export default function Placeholder() {
+  return (
+    <div>
+      <h1>YOU NEED TO EITHER USE "CollapseLeftBtn" OR "CollapseRightBtn" IN YOUR IMPORT</h1>
+    </div>
+  );
+}

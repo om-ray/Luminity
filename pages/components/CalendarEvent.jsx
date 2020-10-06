@@ -1,10 +1,10 @@
 import React, { useCallback, useState } from "react";
 
 let findHighestZIndex = function (elem) {
-  let elems = document.getElementsByTagName(elem);
+  let elems = document?.getElementsByTagName(elem);
   let highest = Number.MIN_SAFE_INTEGER || -(Math.pow(2, 53) - 1);
   for (let i = 0; i < elems.length; i++) {
-    let zindex = Number.parseInt(document.defaultView.getComputedStyle(elems[i], null).getPropertyValue("z-index"), 10);
+    let zindex = Number.parseInt(document?.defaultView.getComputedStyle(elems[i], null).getPropertyValue("z-index"), 10);
     if (zindex > highest) {
       highest = zindex;
     }

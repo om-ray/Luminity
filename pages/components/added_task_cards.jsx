@@ -12,7 +12,7 @@ let AddedTaskCard = function ({ data, index, initialFocus, date }) {
   };
 
   let handleBlur = function () {
-    if (document.getElementById(`${date} + ${data}`)?.getElementsByTagName("textarea")[0].value == "") {
+    if (document?.getElementById(`${date} + ${data}`)?.getElementsByTagName("textarea")[0].value == "") {
       setFocus(false);
     } else {
       return false;
