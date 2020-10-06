@@ -2,6 +2,9 @@
   "name": "nextjs",
   "version": "4.0.0",
   "private": true,
+  "experimental": {
+    "css": true
+  },
   "dependencies": {
     "@date-io/date-fns": "^1.3.13",
     "@emotion/core": "^10.0.34",
@@ -33,6 +36,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
+    "prod_start": "NODE_ENV=production node server.js",
     "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest"
   }
 }

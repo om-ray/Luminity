@@ -19,7 +19,7 @@ function CalendarEvent({ text, style, time, height, id }) {
   let calendar_event_container = document?.getElementById("calendar_event_container");
   let calendar_event_container_top = calendar_event_container?.getBoundingClientRect().top + window.scrollY;
   setInterval(() => {
-    calendar_event_container_top = calendar_event_container.getBoundingClientRect().top + window.scrollY;
+    calendar_event_container_top = calendar_event_container?.getBoundingClientRect().top + window.scrollY;
   }, 1);
   let calendarEvent = document?.getElementById(`${id}`);
   let startHour;
@@ -28,9 +28,9 @@ function CalendarEvent({ text, style, time, height, id }) {
   let endMinutes;
 
   let getAllTimeInfoForCalendarEvent = function () {
-    let timeNodeHeight = document?.getElementById("12 am")?.getBoundingClientRect().height;
+    let timeNodeHeight = document?.getElementById("12 am")?.getBoundingClientRect()?.height;
     let eventTop = calendarEvent?.offsetTop + calendar_event_container_top;
-    let eventBottom = eventTop + calendarEvent?.getBoundingClientRect().height;
+    let eventBottom = eventTop + calendarEvent?.getBoundingClientRect()?.height;
     startHour = Math.floor(eventTop / timeNodeHeight - 0.5) - 2;
     startMinutes = (((eventTop / timeNodeHeight - 0.5) * 60) % 60).toFixed(2);
     startMinutes = (Math.floor(parseInt(startMinutes.replace(/^0\.+/, "")) / 5) * 5).toLocaleString("en-US", {
@@ -61,9 +61,9 @@ function CalendarEvent({ text, style, time, height, id }) {
 
   let initResizeBottom = function (e) {
     startY = e.clientY;
-    startHeight = parseInt(document.defaultView.getComputedStyle(currentResizerHandleBottom.parentElement).height);
-    document.documentElement.addEventListener("mousemove", doResizeBottom, false);
-    document.documentElement.addEventListener("mouseup", stopResizeBottom, false);
+    startHeight = parseInt(document?.defaultView.getComputedStyle(currentResizerHandleBottom.parentElement).height);
+    document?.documentElement.addEventListener("mousemove", doResizeBottom, false);
+    document?.documentElement.addEventListener("mouseup", stopResizeBottom, false);
   };
 
   function doResizeBottom(e) {
@@ -75,15 +75,15 @@ function CalendarEvent({ text, style, time, height, id }) {
 
   function stopResizeBottom(e) {
     setUpdate(false);
-    document.documentElement.removeEventListener("mousemove", doResizeBottom, false);
-    document.documentElement.removeEventListener("mouseup", stopResizeBottom, false);
+    document?.documentElement.removeEventListener("mousemove", doResizeBottom, false);
+    document?.documentElement.removeEventListener("mouseup", stopResizeBottom, false);
   }
 
   let initDragTop = function (e) {
-    startHeight = parseInt(document.defaultView.getComputedStyle(currentDragHandleTop.parentElement).height, 10);
+    startHeight = parseInt(document?.defaultView.getComputedStyle(currentDragHandleTop.parentElement).height, 10);
     startY = e.clientY;
-    document.documentElement.addEventListener("mousemove", doDragTop, false);
-    document.documentElement.addEventListener("mouseup", stopDragTop, false);
+    document?.documentElement.addEventListener("mousemove", doDragTop, false);
+    document?.documentElement.addEventListener("mouseup", stopDragTop, false);
   };
 
   function doDragTop(e) {
@@ -93,8 +93,8 @@ function CalendarEvent({ text, style, time, height, id }) {
   }
 
   function stopDragTop(e) {
-    document.documentElement.removeEventListener("mousemove", doDragTop, false);
-    document.documentElement.removeEventListener("mouseup", stopDragTop, false);
+    document?.documentElement.removeEventListener("mousemove", doDragTop, false);
+    document?.documentElement.removeEventListener("mouseup", stopDragTop, false);
   }
 
   currentResizerHandleBottom?.addEventListener("mousedown", initResizeBottom, false);

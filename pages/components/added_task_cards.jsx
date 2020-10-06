@@ -122,7 +122,7 @@ let AddedTaskCard = function ({ data, index, initialFocus, date }) {
                         </div>
                       }
                       onChange={function (e) {
-                        let taskText = document.getElementById(`${date} + ${data}`)?.getElementsByTagName("textarea")[0];
+                        let taskText = document?.getElementById(`${date} + ${data}`)?.getElementsByTagName("textarea")[0];
                         if (e.target.checked) {
                           taskText.style.textDecoration = "line-through";
                           taskText.style.color = "#7c7c7c";
